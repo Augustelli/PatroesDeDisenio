@@ -1,16 +1,15 @@
-# This is a sample Python script.
+from observer import Publisher, Subscriber
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+pub = Publisher()
 
+sub1 = Subscriber("Subscriber 1")
+sub2 = Subscriber("Subscriber 2")
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+pub.add_subscriber(sub1)
+pub.add_subscriber(sub2)
 
+pub.notify_subscribers("Hello, subscribers!")
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+pub.remove_subscriber(sub1)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+pub.notify_subscribers("Another message")
