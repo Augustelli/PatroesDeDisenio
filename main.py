@@ -1,16 +1,24 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from builder import SportsCarBuilder, RegularCarBuilder
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def main():
+    car_builder = SportsCarBuilder()
+    car_builder.build_wheels()
+    car_builder.build_engine()
+    car_builder.build_body()
 
+    car = car_builder.get_car()
+    print("The car has {} wheels, a {} engine, and a {} body.".format(
+        car.get_wheels(), car.get_engine(), car.get_body()))
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+    car_builder_2 = RegularCarBuilder()
+    car_builder_2.build_body()
+    car_builder_2.build_engine()
+    car_builder_2.build_wheels()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    car2 = car_builder_2.get_car()
+    print("The car has {} wheels, a {} engine, and a {} body.".format(
+        car2.get_wheels(), car2.get_engine(), car2.get_body()))
+
+if __name__ == "__main__":
+    main()
