@@ -1,16 +1,41 @@
-# This is a sample Python script.
+class Handler:
+    def handle(self, request):
+        pass
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+    def set_next(self, handler):
+        self.next_handler = handler
+class ConcreteHandler1(Handler):
+    def handle(self, request):
+        if request.type == "tipo1":
+            print("Manejador 1 ha manejado la solicitud")
+            return True
+        else:
+            return False
+
+class ConcreteHandler2(Handler):
+    def handle(self, request):
+        if request.type == "tipo2":
+            print("Manejador 2 ha manejado la solicitud")
+            return True
+        else:
+            return False
+
+class Request:
+    def __init__(self, type):
+        self.type = type
+
+def client_code(chain):
+    request = Request("tipo1")
+    print("Enviando solicitud...")
+    chain.handle(request)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def main():
+    chain = ConcreteHandler1()
+    chain.set_next(ConcreteHandler2())
 
+    # Usamos la cadena de responsabilidad
+    client_code(chain)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+if __name__ == "__main__":
+    main()
